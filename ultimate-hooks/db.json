@@ -1,0 +1,41 @@
+{
+  "notes": [
+    {
+      "content": "Wow a note has already been added",
+      "id": 1
+    },
+    {
+      "content": "this is a note",
+      "id": 2
+    },
+    {
+      "content": "test note",
+      "id": 3
+    },
+    {
+      "content": "",
+      "id": 4
+    },
+    {
+      "content": "Here we go",
+      "id": 5
+    }
+  ],
+  "persons": [
+    {
+      "name": "mluukkai",
+      "number": "040-5483923",
+      "id": 1
+    },
+    {
+      "name": "szabi",
+      "number": "012-3456789",
+      "id": 2
+    },
+    {
+      "name": "zoli",
+      "number": "012-3456789",
+      "id": 3
+    }
+  ]
+}
