@@ -16,25 +16,25 @@ import './App.css';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(initBlogs());
-  }, [initBlogs]);
+  }, [dispatch]);
 
-  console.log(blogs);
+  // console.log(blogs);
   // console.log(user);
 
   // The createRef method is used to create a blogFormRef ref, that is assigned to the Togglable component containing the creation blog form. The blogFormRef variable acts as a reference to the component.
   const blogFormRef = createRef();
 
   // Fetch all blogs
-  useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs));
-  }, []);
+  // useEffect(() => {
+  //   blogService.getAll().then(blogs => setBlogs(blogs));
+  // }, []);
 
   // Check local storage for user token
   useEffect(() => {
@@ -98,70 +98,70 @@ const App = () => {
 
     // resetNotification();
   };
-  const createBlog = async newBlogObj => {
-    // We can hide the form by calling blogFormRef.current.toggleVisibility() after a new blog has been created
-    blogFormRef.current.toggleVisibility();
+  // const createBlog = async newBlogObj => {
+  //   // We can hide the form by calling blogFormRef.current.toggleVisibility() after a new blog has been created
+  //   blogFormRef.current.toggleVisibility();
 
-    try {
-      const blog = await blogService.create(newBlogObj);
+  //   try {
+  //     const blog = await blogService.create(newBlogObj);
 
-      setBlogs(blogs.concat(blog));
+  //     setBlogs(blogs.concat(blog));
 
-      setNotification({
-        success: true,
-        msg: 'New blog added',
-      });
+  //     setNotification({
+  //       success: true,
+  //       msg: 'New blog added',
+  //     });
 
-      // resetNotification();
-    } catch (error) {
-      console.log(error.response.data.error);
-      setNotification({
-        success: false,
-        msg: error.response.data.error,
-      });
+  //     // resetNotification();
+  //   } catch (error) {
+  //     console.log(error.response.data.error);
+  //     setNotification({
+  //       success: false,
+  //       msg: error.response.data.error,
+  //     });
 
-      // resetNotification();
-    }
-  };
+  //     // resetNotification();
+  //   }
+  // };
 
-  const deleteBlog = async blogID => {
-    const confirm = window.confirm(
-      'Are you sure you want to delete this blog?'
-    );
+  // const deleteBlog = async blogID => {
+  //   const confirm = window.confirm(
+  //     'Are you sure you want to delete this blog?'
+  //   );
 
-    if (!confirm) return null;
+  //   if (!confirm) return null;
 
-    try {
-      const res = await blogService.remove(blogID);
-      const updatedBlogs = blogs.filter(b => b.id !== blogID);
+  //   try {
+  //     const res = await blogService.remove(blogID);
+  //     const updatedBlogs = blogs.filter(b => b.id !== blogID);
 
-      setBlogs(updatedBlogs);
-      setNotification({
-        success: true,
-        msg: res.message,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setBlogs(updatedBlogs);
+  //     setNotification({
+  //       success: true,
+  //       msg: res.message,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const toggleLike = async (type, blogID) => {
-    let resBlogObj;
-    try {
-      type === 'like'
-        ? (resBlogObj = await blogService.like(blogID))
-        : (resBlogObj = await blogService.unlike(blogID));
+  // const toggleLike = async (type, blogID) => {
+  //   let resBlogObj;
+  //   try {
+  //     type === 'like'
+  //       ? (resBlogObj = await blogService.like(blogID))
+  //       : (resBlogObj = await blogService.unlike(blogID));
 
-      const updatedBlogs = blogs.map(b => {
-        if (b.id === resBlogObj.id) return resBlogObj;
-        else return b;
-      });
+  //     const updatedBlogs = blogs.map(b => {
+  //       if (b.id === resBlogObj.id) return resBlogObj;
+  //       else return b;
+  //     });
 
-      setBlogs(updatedBlogs);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setBlogs(updatedBlogs);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -182,13 +182,13 @@ const App = () => {
         <Fragment>
           <h2>Add new blog to list</h2>
           <Togglable buttonLabel='new blog' ref={blogFormRef}>
-            <BlogForm createBlog={createBlog} />
+            <BlogForm blogFormRef={blogFormRef} />
           </Togglable>
           <Blogs
-            blogs={blogs}
+            // blogs={blogs}
             user={user}
-            handleDelete={deleteBlog}
-            handleLike={toggleLike}
+            // handleDelete={deleteBlog}
+            // handleLike={toggleLike}
           />
         </Fragment>
       )}

@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteBlog, likeBlog, unlikeBlog } from '../actions/blogs';
 
-const Blog = ({ blog, user, handleDelete, handleLike }) => {
+const Blog = ({ blog, user }) => {
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState(false);
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     blog.likes.includes(user.id) ? setLiked(true) : setLiked(false);
   }, [blog.likes, user.id]);
+
+  const handleLike = (type, blogID) =>
+    type === 'like' ? dispatch(likeBlog(blogID)) : dispatch(unlikeBlog(blogID));
+
+  const handleDelete = blogID => {
+    const confirm = window.confirm(
+      'Are you sure you want to delete this blog?'
+    );
+
+    return !confirm ? null : dispatch(deleteBlog(blogID));
+  };
 
   // const hideWhenVisible = { display: visible ? 'none' : '' };
   const showWhenVisible = { display: visible ? '' : 'none' };

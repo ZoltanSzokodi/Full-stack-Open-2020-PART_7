@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addBlog } from '../actions/blogs';
 
-const BlogForm = ({ createBlog }) => {
+const BlogForm = ({ blogFormRef }) => {
+  const dispatch = useDispatch();
+
   const initialState = {
     title: '',
     author: '',
@@ -10,6 +14,7 @@ const BlogForm = ({ createBlog }) => {
 
   const handleChange = e => {
     const { name, value } = e.target;
+
     setFields(prevState => ({ ...prevState, [name]: value }));
   };
 
@@ -17,8 +22,11 @@ const BlogForm = ({ createBlog }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    // We can hide the form by calling blogFormRef.current.toggleVisibility() after a new blog has been created
+    blogFormRef.current.toggleVisibility();
 
-    createBlog({ title, author, url });
+    // createBlog({ title, author, url });
+    dispatch(addBlog({ title, author, url }));
 
     handleReset();
   };

@@ -12,8 +12,8 @@ const getAll = async () => {
   return response.data;
 };
 
-const create = async credentials => {
-  const response = await axios.post(baseUrl, credentials, {
+const create = async blogObj => {
+  const response = await axios.post(baseUrl, blogObj, {
     headers: { Authorization: token },
   });
   return response.data;
