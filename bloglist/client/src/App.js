@@ -1,4 +1,8 @@
 import React, { Fragment, useState, useEffect, createRef } from 'react';
+
+import { useDispatch } from 'react-redux';
+import { initBlogs } from './actions/blogs';
+
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -14,6 +18,12 @@ const App = () => {
   const [notification, setNotification] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initBlogs());
+  }, [initBlogs]);
 
   console.log(blogs);
   // console.log(user);
@@ -158,7 +168,9 @@ const App = () => {
       {user && (
         <Fragment>
           <span>{`${user.username} is logged in`}</span>
-          <button onClick={logoutUser}>log out</button>
+          <button type='button' onClick={logoutUser}>
+            log out
+          </button>
         </Fragment>
       )}
 

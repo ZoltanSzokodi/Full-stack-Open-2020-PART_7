@@ -1,4 +1,4 @@
-export default function (a, b) {
+export const sortByLikes = (a, b) => {
   if (a.likes.length > b.likes.length) {
     return -1;
   }
@@ -6,4 +6,4 @@ export default function (a, b) {
     return 1;
   }
   return 0;
-}
+};

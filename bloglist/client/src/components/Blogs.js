@@ -1,6 +1,6 @@
 import React from 'react';
 import Blog from './Blog';
-import sortByLikes from '../helpers/sortByLikes';
+import { sortByLikes } from '../helpers';
 
 const Blogs = ({ blogs, user, handleDelete, handleLike }) => {
   return (
