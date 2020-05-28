@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { deleteBlog, likeBlog, unlikeBlog } from '../actions/blogs';
 
-const Blog = ({ blog, user }) => {
+const Blog = ({ blog }) => {
   const dispatch = useDispatch();
+  const user = useSelector(({ user }) => user);
 
   const [visible, setVisible] = useState(false);
   const [liked, setLiked] = useState(false);

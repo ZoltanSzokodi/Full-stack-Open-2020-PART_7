@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
-const LoginForm = ({ loginUser }) => {
+import { loginUser } from '../actions/user';
+
+const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const initialState = {
     username: '',
     password: '',
@@ -18,7 +22,7 @@ const LoginForm = ({ loginUser }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    loginUser({ username, password });
+    dispatch(loginUser({ username, password }));
 
     handleReset();
   };
@@ -58,10 +62,6 @@ const LoginForm = ({ loginUser }) => {
       </form>
     </Fragment>
   );
-};
-
-LoginForm.propTypes = {
-  loginUser: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

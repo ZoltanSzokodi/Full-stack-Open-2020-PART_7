@@ -10,6 +10,7 @@ const BlogForm = ({ blogFormRef }) => {
     author: '',
     url: '',
   };
+
   const [{ title, author, url }, setFields] = useState(initialState);
 
   const handleChange = e => {
@@ -25,7 +26,6 @@ const BlogForm = ({ blogFormRef }) => {
     // We can hide the form by calling blogFormRef.current.toggleVisibility() after a new blog has been created
     blogFormRef.current.toggleVisibility();
 
-    // createBlog({ title, author, url });
     dispatch(addBlog({ title, author, url }));
 
     handleReset();
