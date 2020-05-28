@@ -8,6 +8,8 @@ import {
   UNLIKE_BLOG,
 } from './types';
 
+import { setNotification } from './notification';
+
 export const initBlogs = () => async dispatch => {
   try {
     const blogs = await blogsService.getAll();
@@ -16,8 +18,11 @@ export const initBlogs = () => async dispatch => {
       type: INIT_BLOGS,
       payload: blogs,
     });
-  } catch (error) {
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };
 
@@ -29,8 +34,13 @@ export const addBlog = blogObj => async dispatch => {
       type: ADD_BLOG,
       payload: newBlog,
     });
-  } catch (error) {
+
+    dispatch(setNotification('New blog added', true, 5000));
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };
 
@@ -44,8 +54,13 @@ export const deleteBlog = blogID => async dispatch => {
       type: DELETE_BLOG,
       payload: blogID,
     });
-  } catch (error) {
+
+    dispatch(setNotification('Blog removed', true, 5000));
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };
 
@@ -57,8 +72,13 @@ export const likeBlog = blogID => async dispatch => {
       type: LIKE_BLOG,
       payload: resBlogObj,
     });
-  } catch (error) {
+
+    dispatch(setNotification(`You liked "${resBlogObj.title}"`, true, 5000));
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };
 
@@ -70,7 +90,12 @@ export const unlikeBlog = blogID => async dispatch => {
       type: UNLIKE_BLOG,
       payload: resBlogObj,
     });
-  } catch (error) {
+
+    dispatch(setNotification(`You unliked "${resBlogObj.title}"`, true, 5000));
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };

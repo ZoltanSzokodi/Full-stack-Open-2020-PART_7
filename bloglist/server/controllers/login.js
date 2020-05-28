@@ -7,13 +7,12 @@ const bcrypt = require('bcryptjs');
 // @route   POST /api/login
 // @access  Public
 exports.login = async (req, res) => {
-  // console.log(req.body);
   const user = await User.findOne({ username: req.body.username });
 
   const passwordCorrect =
     user === null
       ? false
-      : bcrypt.compare(req.body.password, user.passwordHash);
+      : await bcrypt.compare(req.body.password, user.passwordHash);
 
   if (!(user && passwordCorrect))
     return res.status(401).json({ error: 'Invalid credentials' });

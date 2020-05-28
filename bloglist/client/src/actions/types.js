@@ -7,3 +7,6 @@ export const UNLIKE_BLOG = 'UNLIKE_BLOG';
 export const SAVED_USER = 'SAVED_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';

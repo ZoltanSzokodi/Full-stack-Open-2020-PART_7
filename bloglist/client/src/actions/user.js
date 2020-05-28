@@ -3,6 +3,8 @@ import blogService from '../services/blogs';
 
 import { SAVED_USER, LOGIN_USER, LOGOUT_USER } from './types';
 
+import { setNotification } from './notification';
+
 export const savedUser = user => dispatch => {
   const { id, name, username, token } = user;
 
@@ -34,8 +36,13 @@ export const loginUser = credentials => async dispatch => {
         username,
       },
     });
-  } catch (error) {
+
+    dispatch(setNotification(`Welcome back ${name}!`, true, 5000));
+  } catch (err) {
+    const { error } = err.response.data;
     console.log(error);
+
+    dispatch(setNotification(error, false, 5000));
   }
 };
 

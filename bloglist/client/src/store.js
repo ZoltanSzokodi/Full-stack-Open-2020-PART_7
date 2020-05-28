@@ -4,8 +4,9 @@ import thunk from 'redux-thunk';
 
 import blogs from './reducers/blogs';
 import user from './reducers/user';
+import notification from './reducers/notification';
 
-const rootReducer = combineReducers({ blogs, user });
+const rootReducer = combineReducers({ blogs, user, notification });
 
 const store = createStore(
   rootReducer,

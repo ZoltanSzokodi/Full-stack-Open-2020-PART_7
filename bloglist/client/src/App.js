@@ -17,8 +17,7 @@ const App = () => {
   const blogFormRef = createRef();
   const dispatch = useDispatch();
   const user = useSelector(({ user }) => user);
-
-  const [notification, setNotification] = useState(null);
+  const notification = useSelector(({ notification }) => notification);
 
   useEffect(() => {
     dispatch(initBlogs());
@@ -31,13 +30,13 @@ const App = () => {
   }, []);
 
   // Reset notifications after 5s
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setNotification(null);
-    }, 5000);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setNotification(null);
+  //   }, 5000);
 
-    return () => clearTimeout(timeout);
-  }, [notification]);
+  //   return () => clearTimeout(timeout);
+  // }, [notification]);
 
   // EVENT HANDLERS ============================
 
